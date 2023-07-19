@@ -1,25 +1,16 @@
 #! /bin/sh
 apt update
 apt install wget software-properties-common  curl gpg gnupg2 software-properties-common apt-transport-https lsb-release ca-certificates -y
-
 curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg -y
-
 echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |tee  /etc/apt/sources.list.d/pgdg.list
-
 apt update
-
-# Specify/replace the version number you want to install
 apt install postgresql-13 -y
 apt install openjdk-8-jdk -y
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 timedatectl set-timezone Europe/Moscow
-
 apt-get install chrony -y
-
 systemctl enable chrony
-
 useradd tomcat -U -s /bin/false -d /opt/tomcat -m
-
 wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.76/bin/apache-tomcat-9.0.76.tar.gz
 mkdir /opt/tomcat
 tar zxvf apache-tomcat-9.0.76.tar.gz -C /opt/tomcat --strip-components 1
