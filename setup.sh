@@ -6,14 +6,14 @@ echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" 
 apt update
 apt install postgresql-13 -y
 apt install openjdk-8-jdk -y
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 timedatectl set-timezone Europe/Moscow
 apt-get install chrony -y
 systemctl enable chrony
 useradd tomcat -U -s /bin/false -d /opt/tomcat -m
-wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.76/bin/apache-tomcat-9.0.76.tar.gz
+wget  https://downloads.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz
 mkdir /opt/tomcat
-tar zxvf apache-tomcat-9.0.76.tar.gz -C /opt/tomcat --strip-components 1
+tar zxvf apache-tomcat-9.0.80.tar.gz -C /opt/tomcat --strip-components 1
 cat > /etc/systemd/system/tomcat.service << EOF
 
 [Unit]
@@ -24,7 +24,7 @@ After=network.target
 Type=forking
 User=tomcat
 Group=tomcat
-Environment="JAVA_HOME=/usr/lib/jvm/default-java"
+Environment="JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64"
 Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/urandom -Djava.awt.headless=true"
 Environment="CATALINA_BASE=/opt/tomcat"
 Environment="CATALINA_HOME=/opt/tomcat"
@@ -43,7 +43,7 @@ cp -r ./lib/*  /opt/tomcat/lib/
 if [ -d /opt/tomcat/conf/Catalina/localhost ]; then echo 'Folder Catalina exists'; else mkdir -p /opt/tomcat/conf/Catalina/localhost ; fi
 cp -r ./conf/rewrite.config /opt/tomcat/conf/Catalina/localhost
 cp -r ./conf/*.xml /opt/tomcat/conf/
+cd /opt && sudo chown -R tomcat tomcat/
 
-systemctl daemon-reload
-
+systemctl enable tomcat && systemctl daemon-reload
 systemctl start tomcat
