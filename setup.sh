@@ -51,8 +51,8 @@ cp -r ./conf/*.xml /opt/tomcat/conf/
 cp -r ./conf/setenv.sh /opt/tomcat/bin/
 cd /opt && sudo chown -R tomcat tomcat/
 
-sed -i -e"s/^#listen_addresses =.*$/listen_addresses = '*'/" /var/lib/postgresql/data/postgresql.conf
-echo "host    all    all    0.0.0.0/0    md5" >> /var/lib/postgresql/data/pg_hba.conf
+sed -i -e"s/^#listen_addresses =.*$/listen_addresses = '*'/" /etc/postgresql/13/main/postgresql.conf
+echo "host    all    all    0.0.0.0/0    md5" >> /etc/postgresql/13/main/pg_hba.conf
 
 systemctl enable tomcat && systemctl daemon-reload
 systemctl start tomcat
