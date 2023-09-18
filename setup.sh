@@ -43,6 +43,7 @@ cp -r ./lib/*  /opt/tomcat/lib/
 if [ -d /opt/tomcat/conf/Catalina/localhost ]; then echo 'Folder Catalina exists'; else mkdir -p /opt/tomcat/conf/Catalina/localhost ; fi
 cp -r ./conf/rewrite.config /opt/tomcat/conf/Catalina/localhost
 cp -r ./conf/*.xml /opt/tomcat/conf/
+cp -r ./conf/setenv.sh /opt/tomcat/bin/
 cd /opt && sudo chown -R tomcat tomcat/
 
 systemctl enable tomcat && systemctl daemon-reload
