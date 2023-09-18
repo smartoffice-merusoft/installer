@@ -53,6 +53,18 @@ cd /opt && sudo chown -R tomcat tomcat/
 
 sed -i -e"s/^#listen_addresses =.*$/listen_addresses = '*'/" /etc/postgresql/13/main/postgresql.conf
 echo "host    all    all    0.0.0.0/0    md5" >> /etc/postgresql/13/main/pg_hba.conf
+sed -i -e"s/^max_connections = 100.*$/max_connections = 1000/" /etc/postgresql/13/main/postgresql.conf
+sed -i -e"s/^shared_buffers =.*$/shared_buffers = 2GB/" /etc/postgresql/13/main/postgresql.conf
+sed -i -e"s/^#effective_cache_size = 128MB.*$/effective_cache_size = 512MB/" /etc/postgresql/13/main/postgresql.conf
+sed -i -e"s/^#work_mem = 1MB.*$/work_mem = 16MB/" /etc/postgresql/13/main/postgresql.conf
+sed -i -e"s/^#maintenance_work_mem = 16MB.*$/maintenance_work_mem = 2GB/" /etc/postgresql/13/main/postgresql.conf
+sed -i -e"s/^#checkpoint_segments = .*$/checkpoint_segments = 32/" /etc/postgresql/13/main/postgresql.conf
+sed -i -e"s/^#checkpoint_completion_target = 0.5.*$/checkpoint_completion_target = 0.7/" /etc/postgresql/13/main/postgresql.conf
+sed -i -e"s/^#wal_buffers =.*$/wal_buffers = 16MB/" /etc/postgresql/13/main/postgresql.conf
+sed -i -e"s/^#default_statistics_target = 100.*$/default_statistics_target = 100/" /etc/postgresql/13/main/postgresql.conf
+
+#Поменять пароль для пользователя potgres
+su - postgres -c "psql -U postgres -d postgres -c \"alter user postgres with password 'postgres';\""
 systemctl restart postgresql
 
 systemctl enable tomcat && systemctl daemon-reload
