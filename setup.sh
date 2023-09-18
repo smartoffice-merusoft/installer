@@ -29,7 +29,7 @@ Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/urandom -Djava.awt.headle
 Environment="CATALINA_BASE=/opt/tomcat"
 Environment="CATALINA_HOME=/opt/tomcat"
 Environment="CATALINA_PID=/opt/tomcat/temp/tomcat.pid"
-Environment="CATALINA_OPTS=-Xms512M -Xmx4096M -server -XX:+UseParallelGC"
+Environment="CATALINA_OPTS=-Xms512M -Xmx2048M -server -XX:+UseParallelGC"
 ExecStart=/opt/tomcat/bin/startup.sh
 ExecStop=/opt/tomcat/bin/shutdown.sh
 Restart=on-failure
