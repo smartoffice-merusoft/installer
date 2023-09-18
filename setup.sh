@@ -1,11 +1,16 @@
 #! /bin/sh
 apt update
 apt install wget software-properties-common  curl gpg gnupg2 software-properties-common apt-transport-https lsb-release ca-certificates -y
-curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc|gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg -y
-echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" |tee  /etc/apt/sources.list.d/pgdg.list
+sudo sh -c 'echo "deb [arch=$(dpkg --print-architecture)] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list' 
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
+# Update again
+sudo apt-get update
 apt update
 apt install postgresql-13 -y
 apt install openjdk-8-jdk -y
+apt install postgresql-client-common -y
+
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 timedatectl set-timezone Europe/Moscow
 apt-get install chrony -y
@@ -45,6 +50,9 @@ cp -r ./conf/rewrite.config /opt/tomcat/conf/Catalina/localhost
 cp -r ./conf/*.xml /opt/tomcat/conf/
 cp -r ./conf/setenv.sh /opt/tomcat/bin/
 cd /opt && sudo chown -R tomcat tomcat/
+
+sed -i -e"s/^#listen_addresses =.*$/listen_addresses = '*'/" /var/lib/postgresql/data/postgresql.conf
+echo "host    all    all    0.0.0.0/0    md5" >> /var/lib/postgresql/data/pg_hba.conf
 
 systemctl enable tomcat && systemctl daemon-reload
 systemctl start tomcat
