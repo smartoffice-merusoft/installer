@@ -540,11 +540,11 @@
       </init-param>
       <init-param>
         <param-name>cors.allowed.headers</param-name>
-		<param-value>Content-Type,X-Requested-With,Accept,Accept-Encoding,Accept-Language,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Connection,Host,authorization,Access-Control-Allow-Origin,deviceid,deviceos,label_token,tokenuuid,ad_token,cache-control,withCredentials,isTempBucket</param-value>
+		<param-value>Content-Type,X-Requested-With,Accept,Accept-Encoding,Accept-Language,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Connection,Host,authorization,Access-Control-Allow-Origin,deviceid,deviceos,label_token,tokenuuid,ad_token,cache-control,withCredentials,isTempBucket,includeParentsRecursive,locale,Converter</param-value>
       </init-param>
       <init-param>
         <param-name>cors.exposed.headers</param-name>
-        <param-value>Content-Type,X-Requested-With,Accept,Accept-Encoding,Accept-Language,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Connection,Host,authorization,Access-Control-Allow-Origin,deviceid,deviceos,label_token,tokenuuid,ad_token,cache-control,withCredentials,isTempBucket</param-value>
+        <param-value>Content-Type,X-Requested-With,Accept,Accept-Encoding,Accept-Language,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Connection,Host,authorization,Access-Control-Allow-Origin,deviceid,deviceos,label_token,tokenuuid,ad_token,cache-control,withCredentials,isTempBucket,includeParentsRecursive,locale,Converter</param-value>
       </init-param>
     </filter>
     <filter-mapping>
