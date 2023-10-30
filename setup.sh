@@ -1,15 +1,6 @@
 #! /bin/sh
 apt update
-apt install wget software-properties-common  curl gpg gnupg2 software-properties-common apt-transport-https lsb-release ca-certificates -y
-sudo sh -c 'echo "deb [arch=$(dpkg --print-architecture)] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list' 
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-
-# Update again
-sudo apt-get update
-apt update
-apt install postgresql-13 -y
-apt install openjdk-8-jdk -y
-apt install postgresql-client-common -y
+apt install wget software-properties-common  curl gpg gnupg2 software-properties-common apt-transport-https lsb-release ca-certificates  postgresql-13 openjdk-8-jdk postgresql-client-common -y
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 timedatectl set-timezone Europe/Moscow
