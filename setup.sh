@@ -15,11 +15,8 @@ cat > /etc/systemd/system/tomcat.service << EOF
 [Unit]
 Description=Apache Tomcat Server
 After=network.target
-
 [Service]
 Type=forking
-User=tomcat
-Group=tomcat
 Environment="JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64"
 Environment="JAVA_OPTS=-Djava.security.egd=file:///dev/urandom -Djava.awt.headless=true"
 Environment="CATALINA_BASE=/opt/tomcat"
